@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-4">
+    <h3 style="color: var(--dl-navy);">Deeper Life Bible Church - Kofikrom</h3>
+    <small class="text-muted">Kofikrom | Western-North Region, Ghana</small>
+</h3>
+</div>
+<h2>Monthly Report – {{ month }}</h2>
+
+<table class="table table-bordered">
+    <thead class="table-primary">
+        <tr>
+            <th>Service</th>
+            <th>Attendance (Actual / Target)</th>
+            <th>Offering (Actual / Target GH₵)</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s, data in report.items() %}
+        <tr>
+            <td><strong>{{ s }}</strong></td>
+            <td>
+                {{ data.att_actual }} / {{ data.att_target }}
+                {% if data.att_actual >= data.att_target %}
+                    <span class="badge bg-success ms-2">Met</span>
+                {% else %}
+                    <span class="badge bg-warning ms-2">Below</span>
+                {% endif %}
+            </td>
+            <td>
+                {{ data.off_actual }} / {{ data.off_target }}
+                {% if data.off_actual >= data.off_target %}
+                    <span class="badge bg-success ms-2">Met</span>
+                {% else %}
+                    <span class="badge bg-warning ms-2">Below</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if data.att_actual >= data.att_target and data.off_actual >= data.off_target %}
+                    <span class="text-success fw-bold">On Track</span>
+                {% else %}
+                    <span class="text-danger fw-bold">Needs Attention</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+{% endblock %}

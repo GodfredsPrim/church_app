@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-4">
+    <h3 style="color: var(--dl-navy);">Deeper Life Bible Church - Kofikrom</h3>
+    <small class="text-muted">Kofikrom Assembly | Western Region, Ghana</small>
+</h3>
+</div>
+<h2>Funds – Create New</h2>
+<form method="POST" class="mb-4">
+    <div class="mb-3">
+        <input type="text" name="name" class="form-control" placeholder="Fund Name (e.g., Building Fund)" required>
+    </div>
+    <div class="mb-3">
+        <textarea name="description" class="form-control" placeholder="Description (optional)"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Fund</button>
+</form>
+
+<h3>All Funds</h3>
+<ul class="list-group">
+    {% if funds %}
+        {% for f in funds %}
+        <li class="list-group-item">
+            <strong>{{ f.name }}</strong>
+            {% if f.description %}<br><small class="text-muted">{{ f.description }}</small>{% endif %}
+        </li>
+        {% endfor %}
+    {% else %}
+        <li class="list-group-item text-muted">No funds created yet.</li>
+    {% endif %}
+</ul>
+<a href="{{ url_for('dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+{% endblock %}

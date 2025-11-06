@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-4">
+    <h3 style="color: var(--dl-navy);">Deeper Life Bible Church - Kofikrom</h3>
+    <small class="text-muted">Kofikrom | Western-North Region, Ghana</small>
+</h3>
+</div>
+<h2>Register New Member</h2>
+<form method="POST" class="mb-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+        </div>
+        <div class="col-md-3">
+            <select name="gender" class="form-select" required>
+                <option value="">Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select name="age_group" class="form-select" required>
+                <option value="">Age Group</option>
+                <option value="Adult">Adult</option>
+                <option value="Youth">Youth</option>
+                <option value="Child">Child</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <input type="text" name="contact" class="form-control" placeholder="Phone or Email (optional)">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Register Member</button>
+</form>
+
+<h3>All Members ({{ members|length }})</h3>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age Group</th>
+                <th>Contact</th>
+                <th>Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if members %}
+                {% for m in members %}
+                <tr>
+                    <td><code>{{ m.member_id }}</code></td>
+                    <td>{{ m.name }}</td>
+                    <td>{{ m.gender }}</td>
+                    <td>{{ m.age_group }}</td>
+                    <td>{{ m.contact or '-' }}</td>
+                    <td>{{ m.join_date.strftime('%b %d, %Y') }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="6" class="text-center text-muted">No members registered yet.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+<a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+{% endblock %}

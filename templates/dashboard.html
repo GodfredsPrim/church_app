@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-5 text-center" style="color: var(--dl-navy); font-weight: 700;">
+    Church Dashboard – {{ today_str }}
+</h2>
+
+<!-- Today's Stats -->
+<div class="row g-4 mb-5">
+    {% for svc in ['Sunday','Monday','Thursday'] %}
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-header text-white" style="background: var(--dl-blue);">
+                {{ svc }} Service
+            </div>
+            <div class="card-body d-flex flex-column justify-content-center">
+                <div class="counter" id="att-{{ svc }}">{{ attendance[svc] }}</div>
+                <p class="text-muted mt-2">Attendance</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-header text-white" style="background: var(--dl-orange);">
+                {{ svc }} Offering
+            </div>
+            <div class="card-body d-flex flex-column justify-content-center">
+                <div class="counter" id="off-{{ svc }}">GH₵{{ offering[svc] }}</div>
+                <p class="text-muted mt-2">Collected</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Monthly Summary -->
+<h3 class="mb-4" style="color: var(--dl-orange);">This Month</h3>
+<div class="row g-4">
+    {% for svc in ['Sunday','Monday','Thursday'] %}
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <small class="text-muted">{{ svc }} Att.</small>
+                <div class="counter" id="monthly-att-{{ svc }}">{{ monthly_att[svc] }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <small class="text-muted">{{ svc }} Off.</small>
+                <div class="counter" id="monthly-off-{{ svc }}">GH₵{{ monthly_off[svc] }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Full Navigation Grid (All Features) -->
+<div class="row g-3 mt-5 justify-content-center">
+    <div class="col-md-2 col-sm-6">
+        <a href="{{ url_for('attendance') }}" class="btn btn-primary w-100">
+            📊 Attendance
+        </a>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        <a href="{{ url_for('offerings') }}" class="btn btn-success w-100">
+            💰 Offerings
+        </a>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        <a href="{{ url_for('members') }}" class="btn btn-info w-100">
+            👥 Members
+        </a>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        <a href="{{ url_for('funds') }}" class="btn btn-warning w-100">
+            🏦 Funds
+        </a>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        <a href="{{ url_for('contributions') }}" class="btn btn-dark w-100">
+            💎 Contributions
+        </a>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        <a href="{{ url_for('budget') }}" class="btn btn-outline-primary w-100">
+            📈 Budget
+        </a>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        <a href="{{ url_for('monthly_reports') }}" class="btn btn-outline-secondary w-100">
+            📋 Reports
+        </a>
+    </div>
+</div>
+{% endblock %}

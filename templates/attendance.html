@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-4">
+    <h3 style="color: var(--dl-navy);">Deeper Life Bible Church - Kofikrom</h3>
+    <small class="text-muted">Kofikrom Local | Western-North Region, Ghana</small>
+</h3>
+</div>
+<div class="text-center mb-4">
+    <h3 style="color: var(--dl-navy);">Deeper Life Bible Church - Kofikrom</h3>
+    <small class="text-muted">Kofikrom Assembly | Western Region, Ghana</small>
+</h3>
+</div>
+<h2 class="mb-4">Take Attendance</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Service</label>
+        <select name="service_type" class="form-select" required>
+            <option value="Sunday">Sunday Service</option>
+            <option value="Monday">Monday Bible Study</option>
+            <option value="Thursday">Thursday Revival</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Adults – Men</label>
+            <input type="number" name="adults_men" class="form-control" min="0" value="0">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Adults – Women</label>
+            <input type="number" name="adults_women" class="form-control" min="0" value="0">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Youth – Gents</label>
+            <input type="number" name="youth_gents" class="form-control" min="0" value="0">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Youth – Ladies</label>
+            <input type="number" name="youth_ladies" class="form-control" min="0" value="0">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Children – Boys</label>
+            <input type="number" name="children_boys" class="form-control" min="0" value="0">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Children – Girls</label>
+            <input type="number" name="children_girls" class="form-control" min="0" value="0">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Visitors – Male</label>
+            <input type="number" name="visitors_male" class="form-control" min="0" value="0">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Visitors – Female</label>
+            <input type="number" name="visitors_female" class="form-control" min="0" value="0">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Attendance</button>
+</form>
+{% endblock %}
